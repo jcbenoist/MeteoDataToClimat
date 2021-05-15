@@ -15,7 +15,7 @@ def print_stat (libelle, row_i):
 def print_stat_record (libelle, row_i):
     if row_i > 0:
         for i in range (1, 14):
-            print (f'|{libelle}-{mois_libelles[i]}={data[row_i][i]} | {libelle}-date-{mois_libelles[i]}={data[row_i+1][i].replace("-"," ")}')
+            print (f'|{libelle}-{mois_libelles[i]}={data[row_i][i]} | {libelle}-date-{mois_libelles[i]}={data[row_i+1][i].replace("-",".")}')
 
 def next_data_row_i (row_i):
     next_i = row_i+1
@@ -28,7 +28,7 @@ def next_data_row_i (row_i):
 data = []
 mois_libelles = ['', 'jan', 'fev', 'mar', 'avr', 'mai', 'jui', 'jul', 'aou', 'sep', 'oct', 'nov', 'dec', 'ann']
 
-fiche_id = '76540009'
+fiche_id = '24037005'
 fiche_url = f'https://donneespubliques.meteofrance.fr/FichesClim/FICHECLIM_{fiche_id}.data'
 
 ficheclim = urllib.request.urlopen(fiche_url).read()
@@ -74,7 +74,7 @@ for row in data:
 
 print ('{{Climat')
 print (f'|titre={data[2][0]} {data[3][0]}')
-print (f'|source={{{{Lien Web|url={fiche_url.replace("data","pdf")}|titre=Fiche {fiche_id}|site=donneespubliques.meteofrance.fr|date={data[4][0]}}}}}')
+print (f'|source={{{{Lien Web|url={fiche_url.replace("data","pdf")}|titre=Fiche {fiche_id}|site=donneespubliques.meteofrance.fr|date={data[4][0]}|id=MétéoFrance {fiche_id}|libellé=MétéoFrance}}}}')
 
 print_stat ('tmin', TMin_i)
 print_stat ('tmoy', TMoy_i)
