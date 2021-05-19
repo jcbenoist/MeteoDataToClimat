@@ -1,6 +1,7 @@
 import csv
 import urllib.request
 import io
+import re
 
 def print_stat (libelle, row_i):
     if row_i > 0:
@@ -72,8 +73,11 @@ for row in data:
 
     row_i += 1
 
+p = re.compile(r'(.+?) Indicatif : (\d+), alt : (\d+)m, lat : (\d+)°(\d+)\'(\d+)"(\D), lon : (\d+)°(\d+)\'(\d+)"(\D)')
+gn = (p.findall(data[3][0]))[0]
+
 print ('{{Climat')
-print (f'|titre={data[2][0]} {data[3][0]}')
+print (f'|titre={data[2][0]} Station {gn[0]}{gn[1]} Alt: {gn[2]}m {{{{Coord|{gn[3]}|{gn[4]}|{gn[5]}|{gn[6]}|{gn[7]}|{gn[8]}|{gn[9]}|{gn[10]}}}}}')
 print (f'|source={{{{Lien Web|url={fiche_url.replace("data","pdf")}|titre=Fiche {fiche_id}|site=donneespubliques.meteofrance.fr|date={data[4][0]}|id=MétéoFrance {fiche_id}|libellé=MétéoFrance}}}}')
 
 print_stat ('tmin', TMin_i)
