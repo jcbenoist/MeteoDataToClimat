@@ -28,7 +28,7 @@ def next_data_row_i (row_i):
 data = []
 mois_libelles = ['', 'jan', 'fev', 'mar', 'avr', 'mai', 'jui', 'jul', 'aou', 'sep', 'oct', 'nov', 'dec', 'ann']
 
-fiche_id = '44020001'
+fiche_id = '35281001'
 fiche_url = f'https://donneespubliques.meteofrance.fr/FichesClim/FICHECLIM_{fiche_id}.data'
 
 ficheclim = urllib.request.urlopen(fiche_url).read()
@@ -67,7 +67,7 @@ for row in data:
             Rr1_i = row_i
         if ("Rr >=  5 mm" in row[0]):
             Rr5_i = row_i
-        if ("Rr >=  10 mm" in row[0]):
+        if ("Rr >= 10 mm" in row[0]):
             Rr10_i = row_i
 
     row_i += 1
@@ -96,9 +96,9 @@ print ('}}')
 
 print (f'{{{{Météo France|')
 print (f'|Ville=<a compléter>')
-if DIns_i > 0: print (f'|SoleilVille={int(round(float(data[DIns_i][13])))}')
-if PMoy_i > 0: print (f'|PluieVille={int(round(float(data[PMoy_i][13])))}')
-if Neige_i > 0: print (f'|NeigeVille={int(round(float(data[Neige_i][13])))}')
-if Orage_i > 0: print (f'|OrageVille={int(round(float(data[Orage_i][13])))}')
-if Brouillard_i > 0: print (f'|BrouillardVille={int(round(float(data[Brouillard_i][13])))}')
+if DIns_i > 0 and data[DIns_i][13] != '-': print (f'|SoleilVille={int(round(float(data[DIns_i][13])))}')
+if PMoy_i > 0 and data[PMoy_i][13] != '-': print (f'|PluieVille={int(round(float(data[PMoy_i][13])))}')
+if Neige_i > 0 and data[Neige_i][13] != '-': print (f'|NeigeVille={int(round(float(data[Neige_i][13])))}')
+if Orage_i > 0 and data[Orage_i][13] != '-': print (f'|OrageVille={int(round(float(data[Orage_i][13])))}')
+if Brouillard_i > 0 and data[Brouillard_i][13] != '-': print (f'|BrouillardVille={int(round(float(data[Brouillard_i][13])))}')
 print (f'}}}}')
